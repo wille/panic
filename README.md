@@ -1,4 +1,4 @@
-# pypanic
+# panic
 
 UDP and HTTP based decentralized panic button
 
