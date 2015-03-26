@@ -2,6 +2,7 @@ import argparse
 import threading
 import platform
 import socket
+import os
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 argparse = argparse.ArgumentParser()
@@ -26,8 +27,21 @@ def panic():
     print("Shutting down")
 
 def getBroadcastAddresses():
-    addresses = []
-    addresses.append("127.0.0.1")
+    addresses = []    
+    if "Windows" in platform.system():
+        raw = os.popen("ipconfig").read()
+        for line in raw.split("\n"):
+            split = line.split(" : ")
+            if len(split) >= 2 and "IPv4" in split[0]:
+                ip = split[1]
+                ip = ip[:ip.rindex(".")] + ".255"
+                addresses.append(ip)
+                print(ip)
+    elif "Darwin" in platform.system():
+        pass
+    elif "Linux" in platform.system():
+        pass
+    
     return addresses
 
 def createSocket():
