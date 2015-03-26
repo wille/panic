@@ -6,10 +6,10 @@ argparse.add_argument("-s", "--sport", dest = "signalport")
 args = argparse.parse_args()
 
 global button_port
-button_port = int(args.buttonport or 1330)
+button_port = int(args.buttonport or 1300)
 
 global signal_port
-signal_port = int(args.signalport or 1331)
+signal_port = int(args.signalport or 1301)
 
 if __name__ == "__main__":
     pass
