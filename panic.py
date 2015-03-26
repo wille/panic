@@ -37,6 +37,14 @@ if key is None:
 
 def panic():
     print("Shutting down")
+    
+    if not debug:
+        if "Windows" in platform.system():
+            os.popen("shutdown /p /f")
+        elif "Darwin" in platform.system():
+            os.popen("shutdown -s now")
+        elif "Linux" in platform.system():
+            os.popen("poweroff")
 
 def getBroadcastAddresses():
     addresses = []    
