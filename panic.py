@@ -39,7 +39,6 @@ def createSocket():
 def broadcastListener():
     s = createSocket()
     s.bind(("", signal_port))
-
     while True:
         try:
             message, address = s.recvfrom(1024)
@@ -60,7 +59,6 @@ class HTTPHandler(BaseHTTPRequestHandler):
         req = self.path[1:]
         if req == key:
             broadcast()
-            panic()
 
 def createServer():
     server = HTTPServer(("", button_port), HTTPHandler)
