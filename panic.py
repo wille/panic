@@ -10,6 +10,7 @@ argparse.add_argument("-b", "--bport", dest = "buttonport", help = "Port where H
 argparse.add_argument("-s", "--sport", dest = "signalport", help = "Port where UDP server will listen and broadcast signal to")
 argparse.add_argument("-k", "--key", dest = "key", help = "Signal password, preventing unauthorized machines to trigger panic")
 argparse.add_argument("-v", "--verbose", dest = "verbose", action = "store_true", help = "Verbose")
+argparse.add_argument("-s", "--startup", dest = "startup", action = "store_true", help = "Will try to add this script to startup")
 args = argparse.parse_args()
 
 global button_port
@@ -23,6 +24,9 @@ key = args.key
 
 global verbose
 verbose = args.verbose
+
+global startup
+startup = args.startup
 
 if key is None:
     raise Exception("No key specified")
@@ -40,7 +44,6 @@ def getBroadcastAddresses():
                 ip = split[1]
                 ip = ip[:ip.rindex(".")] + ".255"
                 addresses.append(ip)
-                print(ip)
     elif "Darwin" in platform.system():
         pass
     elif "Linux" in platform.system():
@@ -48,7 +51,7 @@ def getBroadcastAddresses():
     
     if verbose:
         for address in addresses:
-            print("Using address " + address)
+            print("Using broadcast address " + address)
     return addresses
 
 def createSocket():
