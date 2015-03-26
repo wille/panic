@@ -34,7 +34,8 @@ def broadcastListener():
 
 class HTTPHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        print("Got request: " + self.path);
+        path = self.path[1:]
+        print("Got request: " + path);
 
 def createServer():
     server = HTTPServer(("", button_port), HTTPHandler)
