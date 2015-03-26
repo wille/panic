@@ -22,10 +22,12 @@ key = args.key
 if key is None:
     raise Exception("No key specified")
 
+def panic():
+    print("Shutting down")
 
 def getBroadcastAddresses():
     addresses = []
-    
+    addresses.append("127.0.0.1")
     return addresses
 
 def createSocket():
@@ -42,7 +44,7 @@ def broadcastListener():
         try:
             message, address = s.recvfrom(1024)
             if message.decode() == key:
-                broadcast()
+                panic()
         except:
             pass
 
@@ -55,8 +57,10 @@ def broadcast():
 
 class HTTPHandler(BaseHTTPRequestHandler):
     def do_GET(self):
-        path = self.path[1:]
-        print("Got request: " + path);
+        req = self.path[1:]
+        if req == key:
+            broadcast()
+            panic()
 
 def createServer():
     server = HTTPServer(("", button_port), HTTPHandler)
