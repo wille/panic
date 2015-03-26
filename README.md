@@ -24,5 +24,5 @@ For script help execute with the --help parameter.
 ## Synopsis
 
 ```
-'python(3) panic.py' [-b | --bport <button-port>] [-s | --sport <udp-port>] [-h | --help] [-k | --key <key>]
+'python(3) panic.py' [-b | --bport <button-port>] [-s | --sport <udp-port>] [-h | --help] [-k | --key <key>] [-v | --verbose]
 ```
