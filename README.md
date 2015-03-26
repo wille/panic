@@ -1,6 +1,6 @@
 # panic
 
-Inspired by and text from [panic_bcast](https://github.com/qnrq/panic_bcast)
+Inspired by and text from [panic_bcast](https://github.com/qnrq/panic_bcast) by [qnrq](http://qnrq.se)
 
 Written in Python 3 with the intention to support Windows, OS X and Linux.
 
