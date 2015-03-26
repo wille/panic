@@ -11,6 +11,7 @@ argparse.add_argument("-s", "--sport", dest = "signalport", help = "Port where U
 argparse.add_argument("-k", "--key", dest = "key", help = "Signal password, preventing unauthorized machines to trigger panic")
 argparse.add_argument("-v", "--verbose", dest = "verbose", action = "store_true", help = "Verbose")
 argparse.add_argument("--startup", dest = "startup", action = "store_true", help = "Will try to add this script to startup")
+argparse.add_argument("--debug", dest = "debug", action = "store_true", help = "Do not execute panic actions")
 args = argparse.parse_args()
 
 global button_port
@@ -27,6 +28,9 @@ verbose = args.verbose
 
 global startup
 startup = args.startup
+
+global debug
+debug = args.debug
 
 if key is None:
     raise Exception("No key specified")
