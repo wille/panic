@@ -3,6 +3,7 @@ import threading
 import platform
 import socket
 import os
+import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 argparse = argparse.ArgumentParser()
@@ -39,16 +40,16 @@ def panic():
     print("Shutting down")
     
     if not debug:
-        if "Windows" in platform.system():
+        if "win" in sys.platform:
             os.popen("shutdown /p /f")
-        elif "Darwin" in platform.system():
+        elif "darwin" in sys.platform:
             os.popen("shutdown -s now")
-        elif "Linux" in platform.system():
+        elif "linux" in sys.platform or "bsd" in sys.platform:
             os.popen("poweroff")
 
 def getBroadcastAddresses():
     addresses = []    
-    if "Windows" in platform.system():
+    if "win" in sys.platform:
         raw = os.popen("ipconfig").read()
         for line in raw.split("\n"):
             split = line.split(" : ")
@@ -56,13 +57,13 @@ def getBroadcastAddresses():
                 ip = split[1]
                 ip = ip[:ip.rindex(".")] + ".255"
                 addresses.append(ip)
-    elif "Darwin" in platform.system():
+    elif "darwin" in sys.platform or "bsd" in sys.platform:
         raw = os.popen("ifconfig").read()
         for line in raw.split("\n"):
             if "broadcast " in line:
                 broadcast = line[line.index("broadcast ") + 10:].strip()
                 addresses.append(broadcast)
-    elif "Linux" in platform.system():
+    elif "linux" in sys.platform:
         raw = os.popen("ifconfig | grep -o \"Bcast:[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\"").read()
         addresses.append(raw[6:])
     
