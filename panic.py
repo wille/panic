@@ -10,7 +10,7 @@ argparse.add_argument("-b", "--bport", dest = "buttonport", help = "Port where H
 argparse.add_argument("-s", "--sport", dest = "signalport", help = "Port where UDP server will listen and broadcast signal to")
 argparse.add_argument("-k", "--key", dest = "key", help = "Signal password, preventing unauthorized machines to trigger panic")
 argparse.add_argument("-v", "--verbose", dest = "verbose", action = "store_true", help = "Verbose")
-argparse.add_argument("-s", "--startup", dest = "startup", action = "store_true", help = "Will try to add this script to startup")
+argparse.add_argument("--startup", dest = "startup", action = "store_true", help = "Will try to add this script to startup")
 args = argparse.parse_args()
 
 global button_port
@@ -47,7 +47,8 @@ def getBroadcastAddresses():
     elif "Darwin" in platform.system():
         pass
     elif "Linux" in platform.system():
-        pass
+        raw = os.popen("ifconfig | grep -o \"Bcast:[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\"").read()
+        addresses.append(raw[6:])
     
     if verbose:
         for address in addresses:
