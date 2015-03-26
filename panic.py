@@ -9,6 +9,7 @@ argparse = argparse.ArgumentParser()
 argparse.add_argument("-b", "--bport", dest = "buttonport", help = "Port where HTTP server will listen")
 argparse.add_argument("-s", "--sport", dest = "signalport", help = "Port where UDP server will listen and broadcast signal to")
 argparse.add_argument("-k", "--key", dest = "key", help = "Signal password, preventing unauthorized machines to trigger panic")
+argparse.add_argument("-v", "--verbose", dest = "verbose", action = "store_true", help = "Verbose")
 args = argparse.parse_args()
 
 global button_port
@@ -19,6 +20,9 @@ signal_port = int(args.signalport or 1301)
 
 global key
 key = args.key
+
+global verbose
+verbose = args.verbose
 
 if key is None:
     raise Exception("No key specified")
@@ -42,6 +46,9 @@ def getBroadcastAddresses():
     elif "Linux" in platform.system():
         pass
     
+    if verbose:
+        for address in addresses:
+            print("Using address " + address)
     return addresses
 
 def createSocket():
