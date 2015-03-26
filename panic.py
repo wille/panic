@@ -5,8 +5,8 @@ import socket
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 argparse = argparse.ArgumentParser()
-argparse.add_argument("-b", "--bport", dest = "buttonport")
-argparse.add_argument("-s", "--sport", dest = "signalport")
+argparse.add_argument("-b", "--bport", dest = "buttonport", help = "Port where HTTP server will listen")
+argparse.add_argument("-s", "--sport", dest = "signalport", help = "Port where UDP server will listen and broadcast signal to")
 args = argparse.parse_args()
 
 global button_port
