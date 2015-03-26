@@ -45,7 +45,11 @@ def getBroadcastAddresses():
                 ip = ip[:ip.rindex(".")] + ".255"
                 addresses.append(ip)
     elif "Darwin" in platform.system():
-        pass
+        raw = os.popen("ifconfig").read()
+        for line in raw.split("\n"):
+            if "broadcast " in line:
+                broadcast = line[line.index("broadcast ") + 10:].strip()
+                addresses.append(broadcast)
     elif "Linux" in platform.system():
         raw = os.popen("ifconfig | grep -o \"Bcast:[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\"").read()
         addresses.append(raw[6:])
