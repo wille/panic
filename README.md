@@ -6,7 +6,7 @@ Written in Python 3 with the intention to support Windows, OS X and Linux.
 
 panic is a network protocol panic button operating decentralized through UDP broadcasts and HTTP. It's intended to act a panic button in a sensitive network making it harder to perform cold boot attacks. A serious freedom fighter will run something like this on all nodes in the computerized network.
 
-To trigger the panic signal over HTTP simply request http://...:8080/<key> from a machine that is running panic. Which ever will do.
+To trigger the panic signal over HTTP simply request http://...:8080/&lt;key&gt; from a machine that is running panic.
 
 ## How it works
 
