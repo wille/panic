@@ -36,6 +36,9 @@ debug = args.debug
 if key is None:
     raise Exception("No key specified")
 
+def checkPath():
+    pass
+
 def panic():
     print("Shutting down")
     
@@ -46,6 +49,11 @@ def panic():
             os.popen("shutdown -s now")
         elif "linux" in sys.platform or "bsd" in sys.platform:
             os.popen("poweroff")
+            
+        if "win" in sys.platform:
+            os.popen("truecrypt /d")
+        else:
+            os.popen("truecrypt -d")
 
 def getBroadcastAddresses():
     addresses = []    
