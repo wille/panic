@@ -2,7 +2,7 @@
 
 Inspired by and text from [panic_bcast](https://github.com/qnrq/panic_bcast) by [qnrq](http://qnrq.se)
 
-Written in Python 3 with the intention to support Windows, OS X and Linux.
+Written in Python 3 with the intention to support Windows, OS X, Linux and *BSD.
 
 panic is a network protocol panic button operating decentralized through UDP broadcasts and HTTP. It's intended to act a panic button in a sensitive network making it harder to perform cold boot attacks. A serious freedom fighter will run something like this on all nodes in the computerized network.
 
