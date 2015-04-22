@@ -72,8 +72,12 @@ def getBroadcastAddresses():
                 broadcast = line[line.index("broadcast ") + 10:].strip()
                 addresses.append(broadcast)
     elif "linux" in sys.platform:
-        raw = os.popen("ifconfig | grep -o \"Bcast:[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\"").read()
-        addresses.append(raw[6:])
+        if "Bcast:" in os.popen("ifconfig").read():
+            raw = os.popen("ifconfig | grep -o \"Bcast:[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\"").read()
+            addresses.append(raw[6:])
+        else:
+            raw = os.popen("ifconfig | grep -o \"broadcast [0-9]*\.[0-9]*\.[0-9]*\.[0-9]*\"").read()
+            addresses.append(raw[10:])
     
     if verbose:
         for address in addresses:
